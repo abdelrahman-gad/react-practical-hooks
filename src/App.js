@@ -13,7 +13,8 @@ function reducer(state,action){
   switch(action.type){
     case action.type='ADD_TODO':
       return {
-         todos:[...state.todos,{text:action.payload.text,completed:false}]
+         todos:[...state.todos,{text:action.payload.text,completed:false}],
+         todoCount:state.todoCount+1
         };  
     case action.type='UPDATE_STATUS':
       console.log(action);
@@ -28,7 +29,10 @@ function reducer(state,action){
 function App() {
 
 
-  const initialState={ todos: [{text:'todo 1 ',completed:false  }] };
+  const initialState = { 
+      todos: [],
+      todoCount:0 
+    };
   const [state,dispatch] = useReducer(reducer,initialState);
   const [text,setText] = useState('');
 
@@ -41,6 +45,9 @@ function App() {
       setText('');
      }}> 
          
+      <h4>  ALL TODOS: {state.todos.length} ||
+       FINISHED   {state.todos.filter(todo=>todo.completed===true).length}  ||
+         UNFINISHED {state.todos.filter(todo=>todo.completed===false).length}  </h4>   
       <input  type="text"  value={text} onChange={(e)=>setText(e.target.value)} />
      
      </form>
