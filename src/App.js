@@ -13,14 +13,21 @@ function App() {
   // // console.log('render');
   // },[]);//will run only when componentDidMount
 
+  // useEffect(()=>{
+  //   console.log('render');
+  //   return ()=>{};//this is a cleanup function "replace to componentWillUnmount"
+  // },[email]);//array of dependencies if anyone of them changed useEffect will run the callback function
+   
+ const [state,setState] = useState({data:null,loading:true});
   useEffect(()=>{
-    console.log('render');
-    return ()=>{};//this is a cleanup function "replace to componentWillUnmount"
-  },[email]);//array of dependencies if anyone of them changed useEffect will run the callback function
+       fetch('http://numbersapi.com/43/trivia')
+       .then(x=>x.text()).then(y=> setState({data:y,loading:false}));
+  });
 
 
   return (
     <div className="App">
+      {state.loading?'Loading.......':state.data};
       <input  type="text" name="email" value={values.email} onChange={handleChange}  />
       <input type="password" name="password" value={values.password}  onChange={handleChange} />
         
