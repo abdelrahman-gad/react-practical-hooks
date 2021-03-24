@@ -10,7 +10,7 @@ function App() {
   //   console.log('render');
   // }); this will run with any change in the state
 
-  const  [count , setCount] = useState(0); 
+  const  [count , setCount] = useState(()=>JSON.parse(localStorage.getItem('count'))||0); 
   // useEffect(()=>{
   // // console.log('render');
   // },[]);//will run only when componentDidMount
@@ -22,6 +22,9 @@ function App() {
    
    const state = useFetch(`http://numbersapi.com/${count}/trivia`);
 
+   useEffect(() => {
+     localStorage.setItem('count',JSON.stringify(count));
+   }, [count]);
 
   return (
     <div className="App">
