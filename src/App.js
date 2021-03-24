@@ -27,7 +27,7 @@ function App() {
   
     useLayoutEffect(() => {
      // measure the dimensions of input after browser maskes all mutations
-     console.log(inputRef.current.getBoundingClientRect());
+    // console.log(inputRef.current.getBoundingClientRect());
     }, [])
   //  console.log(inputRef);
   return (

@@ -3,19 +3,27 @@ import {useFetch} from './useFetch';
 
 function Hello(){
     const  [count , setCount] = useState(()=>JSON.parse(localStorage.getItem('count'))||0); 
-
+    const  divRef = useRef();
     const state = useFetch(`http://numbersapi.com/${count}/trivia`);
  
     useEffect(() => {
       localStorage.setItem('count',JSON.stringify(count));
     }, [count]);
  
+    useLayoutEffect(() => {
+        console.log('hello');
+      console.log(divRef.current.getBoundingClientRect());
+       
+    }, [state.data])
    const renders = useRef(0);
    console.log('renders current'+renders.current++ );
 
     return  ( <>
-      {state.loading?'Loading.......':state.data}
-      <button onClick={()=>setCount(c => c+1 )}>+</button>
+       <div style={{display:'flex' ,border:'2px solid red'}} >
+          <div ref={divRef} style={{ border:'2px solid green' }} > {state.loading?'Loading.......':state.data}</div>
+       </div>
+     
+       <button onClick={()=>setCount(c => c+1 )}>+</button>
        </>  )
 }
 
