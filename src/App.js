@@ -15,6 +15,7 @@ function App() {
 
   useEffect(()=>{
     console.log('render');
+    return ()=>{};//this is a cleanup function "replace to componentWillUnmount"
   },[email]);//array of dependencies if anyone of them changed useEffect will run the callback function
 
 
