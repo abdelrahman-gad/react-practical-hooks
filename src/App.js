@@ -1,14 +1,14 @@
 
 import React , {useState,useEffect,useRef,useLayoutEffect} from 'react';
 import {  useForm  } from "./useFrom";
-
+import {useMeasure} from './useMeasure';
 import Hello from './Hello';
 
 // similar to useEffect 
 //This runs synchronously immediately after React has performed all DOM mutations. [means after the browser paint all elements]
 //This can be useful if you need to make DOM measurements (like getting the scroll position or other styles for an element) and then make DOM mutations or trigger a synchronous re-render by updating state.
 function App() {
-   const inputRef = useRef();
+   
    const [values, handleChange] = useForm({email:'',password:''});
   //  replace of [componentDidMount , componentDidUpdate]
   // useEffect(()=>{
@@ -30,12 +30,14 @@ function App() {
     // console.log(inputRef.current.getBoundingClientRect());
     }, [])
   //  console.log(inputRef);
+  const [rect , inputRef] = useMeasure([values.email]);
   return (
     <div className="App">
     
       <Hello  />
       <br/>
       <input ref={inputRef}  type="text" name="email" value={values.email} onChange={handleChange}  />
+      {JSON.stringify(rect)}
       <input type="password" name="password" value={values.password}  onChange={handleChange} />
       <button onClick={()=> console.log(inputRef.current.focus()) } >Focuus </button>
         
