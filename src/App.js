@@ -1,10 +1,23 @@
 
-import React , {useState} from 'react';
+import React , {useState,useEffect} from 'react';
 import {  useForm  } from "./useFrom";
 function App() {
   
    const [values, handleChange] = useForm({email:'',password:''});
-  
+  //  replace of [componentDidMount , componentDidUpdate]
+  // useEffect(()=>{
+  //   console.log('render');
+  // }); this will run with any change in the state
+
+  // useEffect(()=>{
+  // // console.log('render');
+  // },[]);//will run only when componentDidMount
+
+  useEffect(()=>{
+    console.log('render');
+  },[email]);//array of dependencies if anyone of them changed useEffect will run the callback function
+
+
   return (
     <div className="App">
       <input  type="text" name="email" value={values.email} onChange={handleChange}  />
