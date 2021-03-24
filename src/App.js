@@ -4,7 +4,7 @@ import {  useForm  } from "./useFrom";
 import {useMeasure} from './useMeasure';
 import Hello from './Hello';
 
-// similar to useEffect 
+//  useLayoutEffect  similar to useEffect 
 //This runs synchronously immediately after React has performed all DOM mutations. [means after the browser paint all elements]
 //This can be useful if you need to make DOM measurements (like getting the scroll position or other styles for an element) and then make DOM mutations or trigger a synchronous re-render by updating state.
 function App() {
