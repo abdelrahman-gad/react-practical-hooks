@@ -1,7 +1,7 @@
 
 import React , {useState,useEffect,useRef,useLayoutEffect} from 'react';
 import {  useForm  } from "./useFrom";
-import {useFetch} from './useFetch';
+
 import Hello from './Hello';
 
 // similar to useEffect 
@@ -24,14 +24,7 @@ function App() {
   //   return ()=>{};//this is a cleanup function "replace to componentWillUnmount"
   // },[email]);//array of dependencies if anyone of them changed useEffect will run the callback function
    
-   const  [count , setCount] = useState(()=>JSON.parse(localStorage.getItem('count'))||0); 
-
-   const state = useFetch(`http://numbersapi.com/${count}/trivia`);
-
-   useEffect(() => {
-     localStorage.setItem('count',JSON.stringify(count));
-   }, [count]);
-
+  
     useLayoutEffect(() => {
      // measure the dimensions of input after browser maskes all mutations
      console.log(inputRef.current.getBoundingClientRect());
@@ -39,8 +32,7 @@ function App() {
   //  console.log(inputRef);
   return (
     <div className="App">
-      {state.loading?'Loading.......':state.data}
-      <button onClick={()=>setCount(c => c+1 )}>+</button>
+    
       <Hello  />
       <br/>
       <input ref={inputRef}  type="text" name="email" value={values.email} onChange={handleChange}  />
