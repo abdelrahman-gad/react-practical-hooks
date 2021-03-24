@@ -2,6 +2,7 @@
 import React , {useState,useEffect,useRef} from 'react';
 import {  useForm  } from "./useFrom";
 import {useFetch} from './useFetch';
+import Hello from './Hello';
 function App() {
    const inputRef = useRef();
    const [values, handleChange] = useForm({email:'',password:''});
@@ -31,6 +32,7 @@ function App() {
     <div className="App">
       {state.loading?'Loading.......':state.data}
       <button onClick={()=>setCount(c => c+1 )}>+</button>
+      <Hello  />
       <br/>
       <input ref={inputRef}  type="text" name="email" value={values.email} onChange={handleChange}  />
       <input type="password" name="password" value={values.password}  onChange={handleChange} />
