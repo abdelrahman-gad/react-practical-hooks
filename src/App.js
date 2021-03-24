@@ -1,25 +1,33 @@
 
-import React , {useState,useEffect,useRef,useLayoutEffect,useCallback} from 'react';
+import React , {useState,useEffect,useRef,useLayoutEffect,useCallback, useReducer } from 'react';
 import {  useForm  } from "./useFrom";
 import {useMeasure} from './useMeasure';
 import Hello from './Hello';
+// useReducer is used to initiate and manipulate state in a way similar to redux pattern
+// example 1: counter 
 
-// useCallback hook is used to prevent calling some function every single rendering
+function reducer(state,action){
+  switch(action.type){
+    case action.type='INCREMENT':
+      return state+1;
+    case action.type='DECREMENT':
+      return state-1;
+    default :
+      return state;
+  }
+}
 
 function App() {
-   const [count, setCount ]  = useState(0);
-  const increment = useCallback(
-    ()=>{
-      setCount(c=>c+1);
-    },
-    [setCount],//now whenever count or setCount changes this increment function will be called
-  )
+
+  const [state,dispatch] = useReducer(reducer,0)
+   
   return (  
     <div className="App">
-    
-      <Hello  increment={increment}  />
-       <div>Count : {count}</div>
+       
+      <h3> {state} </h3>
+      <button  onClick={()=>dispatch({type:'INCREMENT'})} >Increment</button>
       
+       <button  onClick={()=>dispatch({type:'DECREMENT'})} >Decrement</button>
     </div>
     );
 }
