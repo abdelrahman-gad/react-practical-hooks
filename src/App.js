@@ -1,16 +1,15 @@
 
 import React , {useState} from 'react';
+import {  useForm  } from "./useFrom";
 function App() {
-  const [{count,count2},setCount] = useState({count:10,count2:20});
-  console.log(count);
+  
+   const [values, handleChange] = useForm({email:'',password:''});
+  
   return (
     <div className="App">
-      <button onClick={
-               () => setCount( currentState =>({...currentState,count:currentState.count+1}))
-        }
-        >+</button>
-      <div>Count1 : { count } </div>
-      <div>Count2 : { count2 } </div>
+      <input  type="text" name="email" value={values.email} onChange={handleChange}  />
+      <input type="password" name="password" value={values.password}  onChange={handleChange} />
+        
       
     </div>
   );
