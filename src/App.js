@@ -10,9 +10,9 @@ import Home from './Home';
 import {UserContext} from './UserContext';
 
 function App() {
-const [value, setValue] = useState('initial Value of the state');
 
 
+const  [user ,setUser] = useState();
 
 
   return (  
@@ -20,10 +20,12 @@ const [value, setValue] = useState('initial Value of the state');
       <ul > 
         <li> <Link to="/">Home </Link>  </li>
         <li> <Link to="/about">About </Link>  </li>
+        <li>  {user?<button onClick={()=>setUser(null)}>Logout</button>:<button onClick={()=>setUser({name:'gad',email:'gad@gad'})} > Login </button> }  </li>
        </ul>
-       <UserContext.Provider value={{ value,setValue }}>
+       <UserContext.Provider value={{ user, setUser }}>
         <Route  exact path="/"  component={Home}  />
         <Route  path="/about" component={About}  />
+        
        </UserContext.Provider>
       
     </Router>
