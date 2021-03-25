@@ -7,6 +7,7 @@ import Hello from './Hello';
 import {BrowserRouter as Router,  Route, Link} from 'react-router-dom';
 import About from './About';
 import Home from './Home';
+import {login} from './utils/login';
 import {UserContext} from './UserContext';
 
 function App() {
@@ -20,7 +21,10 @@ const  [user ,setUser] = useState();
       <ul > 
         <li> <Link to="/">Home </Link>  </li>
         <li> <Link to="/about">About </Link>  </li>
-        <li>  {user?<button onClick={()=>setUser(null)}>Logout</button>:<button onClick={()=>setUser({name:'gad',email:'gad@gad'})} > Login </button> }  </li>
+        <li>  {user?<button onClick={()=>setUser(null)}>Logout</button>:<button onClick={()=>{
+          const user = login();
+          setUser(user);
+        }} > Login </button> }  </li>
        </ul>
        <UserContext.Provider value={{ user, setUser }}>
         <Route  exact path="/"  component={Home}  />

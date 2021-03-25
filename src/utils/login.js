@@ -1,7 +1,8 @@
-export const login = async ( )=>{
-  return await {
+export const login =  ( ) => {
+    const  user =  {
        id:1,
        name:'gad',
        email:'gad@gad'
   }
+  return user;
 }
